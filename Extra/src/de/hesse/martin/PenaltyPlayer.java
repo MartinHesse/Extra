@@ -26,12 +26,7 @@ public class PenaltyPlayer extends Player {
 	
 	@Override
 	public void reset(){
-		games++;
-		averagePoints = averagePoints + (1.0 * punkte / games) - (1.0 * averagePoints / games);
-		sp = new Spielfeld();
-		spielStatus = true;
-		punkte = 0;
-		anzKeineExZahl = 0;
+		super.reset();
 		moveCount = 0;
 		lastMove = false;
 	}

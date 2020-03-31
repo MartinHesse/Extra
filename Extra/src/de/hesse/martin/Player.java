@@ -1,5 +1,8 @@
 package de.hesse.martin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Player {
 	protected abstract int pickExZahl(int[]würfel, Würfel[] ganzeWürfel);
 	protected abstract int pickZahlen(int [] würfel, Würfel[] ganzeWürfel);
@@ -8,6 +11,8 @@ public abstract class Player {
 	protected boolean spielStatus = true;
 	protected int punkte;
 	protected double averagePoints = 0.0;
+	protected double stdabw = 0.0;
+	protected List<Integer> allPoints = new ArrayList<>();
 	protected int games = 0;
 	protected String name;
 	protected int anzKeineExZahl = 0;
@@ -16,6 +21,7 @@ public abstract class Player {
 	public void reset() {
 		games++;
 		averagePoints = averagePoints + (1.0 * punkte / games) - (1.0 * averagePoints / games);
+		allPoints.add(punkte);
 		sp = new Spielfeld();
 		spielStatus = true;
 		punkte = 0;
