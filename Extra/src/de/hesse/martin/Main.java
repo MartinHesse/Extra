@@ -36,6 +36,23 @@ public class Main {
 				System.out.println("Time for 100 rounds: " + roundTime + "ms");
 			}
 			game();
+			if (i % 1000 == 999){
+				Hilfe.sortListPlayer(players);
+				for (Player p : players) {
+			        PrintWriter pWriter = null;
+			        try {
+			            pWriter = new PrintWriter(new BufferedWriter(new FileWriter("zwischenergebnis_" + (i + 1) + ".txt", true)));
+			            pWriter.println("Durchschnittspunkte von " + p.name + ": " + p.averagePoints);
+			        } catch (IOException ioe) {
+			            ioe.printStackTrace();
+			        } finally {
+			            if (pWriter != null){
+			                pWriter.flush();
+			                pWriter.close();
+			            }
+			        }
+				}
+			}
 			for (Player pl : players) {
 				pl.reset();
 			}
@@ -43,16 +60,7 @@ public class Main {
 				timeStart = System.currentTimeMillis();
 			}
 		}
-		Collections.sort(players, new Comparator<Player>() {
-			@Override
-			public int compare(Player o1, Player o2) {
-				double avgp1 = o1.averagePoints;
-				double avgp2 = o2.averagePoints;
-				if (avgp1 == avgp2) return 0;
-				if (avgp1 < avgp2) return 1;
-				else return -1;
-			}
-		});
+		Hilfe.sortListPlayer(players);
 		for (Player p : players) {
 			//Durchschnittspunkte:
 			double avgPoints = p.averagePoints;

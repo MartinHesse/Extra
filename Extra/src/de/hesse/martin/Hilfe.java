@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 public class Hilfe {
@@ -78,6 +81,19 @@ public class Hilfe {
 		int tmp = input[k];
 		input[k] = input[i];
 		input[i] = tmp;
+	}
+	
+	public static void sortListPlayer (List<Player> players) {
+		Collections.sort(players, new Comparator<Player>() {
+			@Override
+			public int compare(Player o1, Player o2) {
+				double avgp1 = o1.averagePoints;
+				double avgp2 = o2.averagePoints;
+				if (avgp1 == avgp2) return 0;
+				if (avgp1 < avgp2) return 1;
+				else return -1;
+			}
+		});
 	}
 	
 	public static int hamming(int in1, int in2) {
